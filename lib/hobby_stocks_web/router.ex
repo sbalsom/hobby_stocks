@@ -17,7 +17,7 @@ defmodule HobbyStocksWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    # get "/stats", StatsController, :index
+    get "/stocks", StocksController, :index
   end
 
   # Other scopes may use custom stacks.
