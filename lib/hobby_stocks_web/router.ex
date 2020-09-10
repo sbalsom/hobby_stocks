@@ -18,6 +18,7 @@ defmodule HobbyStocksWeb.Router do
 
     get "/", PageController, :index
     get "/stocks", StocksController, :index
+    get "/stocks/:ticker", StocksController, :show
   end
 
   # Other scopes may use custom stacks.
