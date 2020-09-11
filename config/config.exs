@@ -8,7 +8,8 @@
 use Mix.Config
 
 config :hobby_stocks,
-  ecto_repos: [HobbyStocks.Repo]
+  ecto_repos: [HobbyStocks.Repo],
+  tiingo_token: "cdb1e5f1ab90210894b2990fa2d5576901b589ba"
 
 config :hobby_stocks, HobbyStocks.Repo,
   port: 5434
