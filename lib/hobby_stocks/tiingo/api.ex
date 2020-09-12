@@ -17,17 +17,13 @@ defmodule HobbyStocks.Tiingo.Api do
 
     case get(ticker, query: @auth) do
       {:ok, %Tesla.Env{body: [%{"ticker"=> ^ticker} = data]} = response} ->
-        IO.write("success!")
-        IO.inspect(response.body)
         StockStorage.save(data)
 
       {:ok, %Tesla.Env{body: %{"detail" => "Please supply a token"}} = response} ->
         IO.write("error no token!")
-        IO.inspect(response)
         # TODO : log response, request data, and error
       error ->
         IO.write("unknown error:(")
-        IO.inspect(error)
         # TODO : log error
     end
   end
