@@ -1,31 +1,34 @@
 defmodule HobbyStocks.Tiingo.Api do
-    @moduledoc """
-    tiingo.com API wrapper
-    """
+  @moduledoc """
+  tiingo.com API wrapper
+  """
 
-    use Tesla
+  use Tesla
 
-    @auth %{token: Application.get_env(:hobby_stocks, :tiingo_token)}
+  alias HobbyStocks.Tiingo.StockStorage
 
-    plug Tesla.Middleware.BaseUrl, "https://api.tiingo.com/iex"
-    plug Tesla.Middleware.JSON
+  @auth %{token: Application.get_env(:hobby_stocks, :tiingo_token)}
 
-    def poll(%{ticker: ticker}) do
-      ticker = String.upcase(ticker)
+  plug Tesla.Middleware.BaseUrl, "https://api.tiingo.com/iex"
+  plug Tesla.Middleware.JSON
 
-      case get(ticker, query: @auth) do
-        {:ok, %Tesla.Env{body: [%{"ticker"=> ^ticker}]} = response} ->
-          IO.write("success!")
-          IO.inspect(response.body)
-          # TODO : save data to DB
-        {:ok, %Tesla.Env{body: %{"detail" => "Please supply a token"}} = response} ->
-          IO.write("error no token!")
-          IO.inspect(response)
-          # TODO : log response, request data, and error
-        error ->
-          IO.write("unknown error:(")
-          IO.inspect(error)
-          # TODO : log error
-      end
+  def poll(%{ticker: ticker}) do
+    ticker = String.upcase(ticker)
+
+    case get(ticker, query: @auth) do
+      {:ok, %Tesla.Env{body: [%{"ticker"=> ^ticker} = data]} = response} ->
+        IO.write("success!")
+        IO.inspect(response.body)
+        StockStorage.save(data)
+
+      {:ok, %Tesla.Env{body: %{"detail" => "Please supply a token"}} = response} ->
+        IO.write("error no token!")
+        IO.inspect(response)
+        # TODO : log response, request data, and error
+      error ->
+        IO.write("unknown error:(")
+        IO.inspect(error)
+        # TODO : log error
     end
+  end
 end
