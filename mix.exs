@@ -19,6 +19,7 @@ defmodule HobbyStocks.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
+      registered: [HobbyStocks.Tiingo.PollClient],
       mod: {HobbyStocks.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]

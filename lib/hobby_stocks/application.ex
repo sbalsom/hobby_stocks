@@ -4,6 +4,8 @@ defmodule HobbyStocks.Application do
   @moduledoc false
 
   use Application
+  import Supervisor.Spec
+
 
   def start(_type, _args) do
     children = [
@@ -14,9 +16,9 @@ defmodule HobbyStocks.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: HobbyStocks.PubSub},
       # Start the Endpoint (http/https)
-      HobbyStocksWeb.Endpoint
-      # Start a worker by calling: HobbyStocks.Worker.start_link(arg)
-      # {HobbyStocks.Worker, arg}
+      HobbyStocksWeb.Endpoint,
+      # Start Supervision Tree
+      HobbyStocks.Supervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
