@@ -12,7 +12,7 @@ config :hobby_stocks,
   tiingo_token: "cdb1e5f1ab90210894b2990fa2d5576901b589ba"
 
 config :hobby_stocks, HobbyStocks.Repo,
-  port: 5434
+  port: System.get_env("PGPORT") || 5432
 
 # Configures the endpoint
 config :hobby_stocks, HobbyStocksWeb.Endpoint,
