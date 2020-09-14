@@ -1,9 +1,10 @@
-defmodule HobbyStocks.Tiingo.PollClient do
+defmodule HobbyStocks.Tiingo.PollScheduler do
   use GenServer
 
   alias HobbyStocks.Tiingo.Api
 
   def start_link do
+    # Hard coded to fetch only Apple Stocks
     GenServer.start_link(__MODULE__, %{ticker: "aapl"}, name: __MODULE__)
   end
 
@@ -28,10 +29,7 @@ defmodule HobbyStocks.Tiingo.PollClient do
   end
 
   defp schedule_self() do
-    # TODO : only schedule work if the stock market is open ?
-    # TODO : Instead of calling this endpoint once an hour, call the historical prices endpoint with freq = 5 minutes
-    # and save all the data from that one call to db
-    #  TODO : Could use QUantum Core cron scheduler instead
+    # Calls Api Client once an hour to fetch stock data (to test, change value to 5000)
     Process.send_after(self(), :schedule_work, 60 * 60 * 1000)
   end
 

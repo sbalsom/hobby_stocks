@@ -4,12 +4,12 @@ defmodule HobbyStocks.Tiingo.StockStorage do
     alias HobbyStocks.Repo
 
     def save(stock_data) do
-      # TODO : Log saving data to db
+      # TODO : Add logger
       stock_price = %StockPrice{}
       attrs = adapt(stock_data)
       changeset = StockPrice.changeset(stock_price, attrs)
       case Repo.insert(changeset) do
-        {:ok, _stock_price} -> IO.write("Stock saved ! ")
+        {:ok, _stock_price} -> IO.puts("Stock saved ! ")
         {:error, changeset} -> IO.inspect(changeset.errors)
       end
     end
