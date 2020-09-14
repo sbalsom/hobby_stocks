@@ -9,7 +9,7 @@ use Mix.Config
 
 config :hobby_stocks,
   ecto_repos: [HobbyStocks.Repo],
-  tiingo_token: "cdb1e5f1ab90210894b2990fa2d5576901b589ba"
+  tiingo_token: System.get_env("TIINGO_TOKEN")
 
 config :hobby_stocks, HobbyStocks.Repo,
   port: System.get_env("PGPORT") || 5432
