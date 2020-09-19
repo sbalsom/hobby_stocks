@@ -1,7 +1,10 @@
 defmodule HobbyStocks.Tiingo.PollScheduler do
+  @moduledoc """
+  Schedules hourly polls of apple stock data from tiingo on startup
+  """
   use GenServer
 
-  alias HobbyStocks.Tiingo.Api
+  alias HobbyStocks.Tiingo.ApiClient
 
   def start_link do
     # Hard coded to fetch only Apple Stocks
@@ -18,7 +21,7 @@ defmodule HobbyStocks.Tiingo.PollScheduler do
   end
 
   def handle_cast(:poll_tiingo, state) do
-    Api.poll(state)
+    ApiClient.poll(state)
     {:noreply, state}
   end
 
@@ -32,5 +35,4 @@ defmodule HobbyStocks.Tiingo.PollScheduler do
     # Calls Api Client once an hour to fetch stock data (to test, change value to 5000)
     Process.send_after(self(), :schedule_work, 60 * 60 * 1000)
   end
-
 end
