@@ -2,7 +2,7 @@ defmodule HobbyStocks.Coinbase.WSClient do
   @moduledoc """
   Connects to the Coinbase websockets stream on app startup
 
-  FYI data for matches will look like this  :
+  FYI data for match channel will look like this  :
   %{
     "maker_order_id" => "048f76da-a87d-40b5-b069-dfaee4f0f420",
     "price" => "10927.98",
@@ -16,7 +16,7 @@ defmodule HobbyStocks.Coinbase.WSClient do
     "type" => "match"
   }
 
-  data for ticker will look like this :
+  data for ticker channel will look like this :
 
   %{
   "best_ask" => "10960.54",
@@ -53,6 +53,7 @@ defmodule HobbyStocks.Coinbase.WSClient do
   end
 
   def subscribe(pid, %{products: products, channels: channels}) do
+    IO.puts("Subscribing...")
     WebSockex.send_frame(pid, subscription_frame(products, channels))
   end
 
@@ -75,11 +76,12 @@ defmodule HobbyStocks.Coinbase.WSClient do
     {:ok, state}
   end
 
-  defp handle_msg(%{"type" => type} = trade, state) do
+  defp handle_msg(%{"type" => channel, "product_id" => symbol} = trade, state) do
     IO.write("yay")
-    IO.inspect(trade)
-    [ticker] = state
-    HobbyStocksWeb.Endpoint.broadcast("#{type}:#{ticker}", "#{type}_event", trade)
+    # IO.inspect(trade)
+    channel_name = "#{channel}:#{symbol}"
+    IO.puts(channel_name)
+    HobbyStocksWeb.Endpoint.broadcast(channel_name, "#{channel}_event", trade)
     {:ok, state}
   end
 

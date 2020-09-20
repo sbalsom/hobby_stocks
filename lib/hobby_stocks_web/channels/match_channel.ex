@@ -1,8 +1,8 @@
-defmodule HobbyStocksWeb.MatchesChannel do
+defmodule HobbyStocksWeb.MatchChannel do
   use Phoenix.Channel
 
-  def join("matches:" <> symbol, _msg, socket) do
-    IO.puts("joined matches channel for #{symbol}")
+  def join("match:" <> symbol, _msg, socket) do
+    IO.puts("joined match channel for #{symbol}")
     {:ok, socket}
   end
 
