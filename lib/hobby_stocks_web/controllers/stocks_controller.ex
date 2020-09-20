@@ -6,7 +6,10 @@ defmodule HobbyStocksWeb.StocksController do
   end
 
   def show(conn, %{"ticker" => ticker}) do
-    # use params[:ticker] to display one single stock profile
     render(conn, "show.html", ticker: ticker)
+  end
+
+  def stream(conn, %{"ticker" => ticker, "channel" => channel}) do
+    render(conn, "stream.html", ticker: ticker, channel: channel)
   end
 end

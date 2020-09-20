@@ -1,5 +1,6 @@
 <div class="phx-hero">
   <h2>Here is the requested stock profile:</h2>
   <h3> Ticker: <%= @ticker %></h3>
-  <h3> Locale: <%= @locale %>
+  <p>Here will be a static page displaying ticker profile info</p>
+  <h3> Locale: <%= @locale %></h3>
 </div>
