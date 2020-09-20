@@ -53,6 +53,39 @@ let Ticker = {
 
       if (channelType == "ticker") {
         let channel = socket.channel(`ticker:${ticker}`, {})
+        let dataset = myChart.data.datasets[0].data
+
+        let price = document.getElementById("price");
+        let time = document.getElementById("time")
+        let size = document.getElementById("size")
+        let type = document.getElementById("type")
+
+        channel.join()
+          .receive("ok", resp => { console.log("Joined successfully", resp) })
+          .receive("error", resp => { console.log("Unable to join", resp) });
+
+        channel.on("ticker_event", payload => {
+          console.log(payload)
+
+          let newPrice = parseFloat(payload["price"])
+          let newDate = new Date(payload["time"])
+          let side = payload["side"]
+
+          let newData = {
+            t: newDate, y: newPrice
+          }
+          dataset.push(newData)
+          console.log(dataset.length)
+          // if (dataset.length > 100000) {
+          //   dataset.shift();
+          // }
+          myChart.update();
+          console.log(dataset)
+          price.innerHTML = `${newPrice}`
+          size.innerHTML = `${payload["last_size"]}`
+          time.innerHTML = `${newDate.toLocaleString()}`
+          type.innerHTML = `${side}`
+        });
       } else if (channelType == "match") {
         let channel = socket.channel(`match:${ticker}`, {})
 
@@ -69,14 +102,14 @@ let Ticker = {
 
         channel.on("match_event", payload => {
           console.log(payload)
-          let newPrice = parseFloat(payload["price"])
           let dataset = myChart.data.datasets[0].data
+
+          let newPrice = parseFloat(payload["price"])
           let newDate = new Date(payload["time"])
           let side = payload["side"]
           let newData = {
             t: newDate, y: newPrice
           }
-          count = count + 1;
           dataset.push(newData)
 
           if (dataset.length > 30) {

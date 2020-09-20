@@ -11,7 +11,7 @@ defmodule HobbyStocks.Coinbase.Supervisor do
         HobbyStocks.Coinbase.WSClient,
         [
           %{
-            products: ["BTC-USD", "BTC-USD", "ETH-USD", "ETH-EUR"],
+            products: ["BTC-USD", "BTC-EUR", "ETH-USD", "ETH-EUR"],
             channels: ["ticker", "matches"]
           }
         ],
