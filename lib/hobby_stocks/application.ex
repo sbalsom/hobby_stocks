@@ -5,7 +5,6 @@ defmodule HobbyStocks.Application do
 
   use Application
 
-
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
@@ -17,6 +16,7 @@ defmodule HobbyStocks.Application do
       # Start the Endpoint (http/https)
       HobbyStocksWeb.Endpoint,
       # Start Supervision Tree
+      {Cachex, name: :coinbase_cache, limit: 12000},
       HobbyStocks.Supervisor
     ]
 

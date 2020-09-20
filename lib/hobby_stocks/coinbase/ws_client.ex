@@ -48,18 +48,14 @@ defmodule HobbyStocks.Coinbase.WSClient do
   end
 
   def handle_connect(_conn, state) do
-    IO.puts("Connected ! ")
     {:ok, state}
   end
 
   def subscribe(pid, %{products: products, channels: channels}) do
-    IO.puts("Subscribing...")
     WebSockex.send_frame(pid, subscription_frame(products, channels))
   end
 
   def subscription_frame(products, channels) do
-    IO.inspect(channels)
-
     subscription_msg =
       %{
         type: "subscribe",
@@ -77,22 +73,18 @@ defmodule HobbyStocks.Coinbase.WSClient do
   end
 
   defp handle_msg(%{"type" => channel, "product_id" => symbol} = trade, state) do
-    IO.write("yay")
-    # IO.inspect(trade)
+    Cachex.put!(:coinbase_cache, trade["trade_id"], trade)
     channel_name = "#{channel}:#{symbol}"
-    IO.puts(channel_name)
     HobbyStocksWeb.Endpoint.broadcast(channel_name, "#{channel}_event", trade)
     {:ok, state}
   end
 
   defp handle_msg(any, state) do
-    IO.write("whoops")
     IO.inspect(any)
     {:ok, state}
   end
 
   def handle_disconnect(_conn, state) do
-    IO.puts("Disconnected :(")
     {:reconnect, state}
   end
 end

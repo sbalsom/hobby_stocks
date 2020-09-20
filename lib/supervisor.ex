@@ -8,7 +8,8 @@ defmodule HobbyStocks.Supervisor do
   def init(_) do
     children = [
       supervisor(HobbyStocks.Tiingo.Supervisor, []),
-      supervisor(HobbyStocks.Coinbase.Supervisor, [])
+      supervisor(HobbyStocks.Coinbase.Supervisor, []),
+      worker(HobbyStocks.Coinbase.CacheLoader, [])
     ]
 
     supervise(children, strategy: :one_for_one)

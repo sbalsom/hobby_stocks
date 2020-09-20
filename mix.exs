@@ -19,6 +19,7 @@ defmodule HobbyStocks.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
+      applications: [:cachex, :websockex, :postgrex, :phoenix_ecto, :cowboy],
       registered: [HobbyStocks.Tiingo.PollScheduler, HobbyStocks.Coinbase.WSClient],
       mod: {HobbyStocks.Application, []},
       extra_applications: [:logger, :runtime_tools]
@@ -49,7 +50,8 @@ defmodule HobbyStocks.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:tesla, "~> 1.3.0"},
       {:riverside, "~> 1.2.6"},
-      {:timex, "~> 3.6"}
+      {:timex, "~> 3.6"},
+      {:cachex, "~> 3.3"}
     ]
   end
 

@@ -3,6 +3,7 @@ defmodule HobbyStocksWeb.TickerChannel do
 
   def join("ticker:" <> symbol, _msg, socket) do
     IO.puts("joined ticker channel for #{symbol}")
+    Process.send_after(HobbyStocks.Coinbase.CacheLoader, {:load_cache, symbol}, 1)
     {:ok, socket}
   end
 
