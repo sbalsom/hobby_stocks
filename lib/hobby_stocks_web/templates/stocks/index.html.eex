@@ -1,3 +1,20 @@
 <div class="phx-hero">
-  <h2>Here we will have a list of all stock profiles available</h2>
+  <h2>Here we will have a list of all stock profiles/services available</h2>
+  <ul>
+    <li>
+      <h3>Tiingo -- will be link to any tiingo content</h3>
+    </li>
+    <li>
+      <h3>Coinbase -- link to any coinbase-wide content (maybe profiles of each stock)</h3>
+      <ul>
+        <li><%= link "BTC-USD", to: Routes.stocks_path(@conn, :stream, ticker: "BTC-USD") %></li>
+        <%# need to send query to stream page as ticker=ticker_name %>
+        <li><%= link "BTC-EUR", to: Routes.stocks_path(@conn, :stream, ticker: "BTC-EUR") %></li>
+        <li><%= link "ETH-USD", to: Routes.stocks_path(@conn, :stream, ticker: "ETH-USD") %></li>
+        <li><%= link "ETH-EUR", to: Routes.stocks_path(@conn, :stream, ticker: "ETH-EUR") %></li>
+      </ul>
+    </li>
+    <li>
+      <h3>Binance -- link to any binance content</h3>
+    </li>
 </div>
