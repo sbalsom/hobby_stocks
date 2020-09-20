@@ -1,11 +1,13 @@
 <div class="phx-hero" style="position: absolute;">
-  <h2>Last 30 Sales</h2>
+  <h2>Last 200 Sales</h2>
   <h3><%= @ticker %></h3>
+
   <ul class="left-aligned-list">
+    <li class="list-header">Last sale data: </li>
     <li>Price: <span id="price"></span></li>
     <li>Size: <span id="size"></span></li>
-    <li>Time (UTC): <span id="time"></span></li>
+    <li>Time: <span id="time"></span></li>
     <li>Type: <span id="type"></span></li>
   </ul>
-  <canvas id="myChart" style="position: relative; height:80vh; width:80vw"></canvas>
+  <canvas id="myChart"></canvas>
 </div>
