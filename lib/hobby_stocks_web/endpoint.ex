@@ -10,7 +10,7 @@ defmodule HobbyStocksWeb.Endpoint do
     signing_salt: "73R4hgkz"
   ]
 
-  socket "/socket", HobbyStocksWeb.UserSocket,
+  socket "/stream", HobbyStocksWeb.UserSocket,
     websocket: true,
     longpoll: false
 

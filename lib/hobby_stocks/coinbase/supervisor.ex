@@ -7,7 +7,16 @@ defmodule HobbyStocks.Coinbase.Supervisor do
 
   def init(_) do
     children = [
-      worker(HobbyStocks.Coinbase.WSClient, [])
+      worker(
+        HobbyStocks.Coinbase.WSClient,
+        [
+          %{
+            products: ["BTC-USD", "BTC-USD", "ETH-USD", "ETH-EUR"],
+            channels: ["ticker", "matches"]
+          }
+        ],
+        id: :coinbase_crypto_worker
+      )
     ]
 
     supervise(children, strategy: :one_for_one)
