@@ -1,6 +1,4 @@
-// import Chart from 'chart.js';
-// import Chart = require( "chart.js" );
-var Chart = require('chart.js');
+import Chart from 'chart.js';
 
 let price = document.getElementById("price");
 let time = document.getElementById("time")

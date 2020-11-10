@@ -8,8 +8,7 @@
 use Mix.Config
 
 config :hobby_stocks,
-  ecto_repos: [HobbyStocks.Repo],
-  tiingo_token: System.get_env("TIINGO_TOKEN")
+  ecto_repos: [HobbyStocks.Repo]
 
 config :hobby_stocks, HobbyStocks.Repo,
   port: System.get_env("PGPORT") || 5432
