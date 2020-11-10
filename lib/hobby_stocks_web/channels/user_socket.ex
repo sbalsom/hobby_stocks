@@ -5,7 +5,7 @@ defmodule HobbyStocksWeb.UserSocket do
   channel "ticker:*", HobbyStocksWeb.TickerChannel
   channel "match:*", HobbyStocksWeb.MatchChannel
 
-  @impl true
+  @impl false
   def connect(_params, socket, _connect_info) do
     {:ok, socket}
   end
