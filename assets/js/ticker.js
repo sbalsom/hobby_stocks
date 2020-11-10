@@ -1,4 +1,6 @@
-import Chart from 'chart.js';
+// import Chart from 'chart.js';
+// import Chart = require( "chart.js" );
+var Chart = require('chart.js');
 
 let price = document.getElementById("price");
 let time = document.getElementById("time")
@@ -30,8 +32,6 @@ function extractData(set) {
 }
 
 function writeAllToChart(cache) {
-  console.log("writing all ")
-  console.log(cache.length)
   myChart.data.datasets[0].data = cache.map(extractData).sort(function (a, b) {
     return a.t - b.t;
   })
