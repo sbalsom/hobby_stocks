@@ -4,7 +4,7 @@
 import { Socket } from "phoenix"
 
 
-let socket = new Socket("/stream", { params: { token: window.userToken } })
+let socket = new Socket("/stream")
 
 socket.connect()
 
