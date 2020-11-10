@@ -51,7 +51,8 @@ defmodule HobbyStocks.MixProject do
       {:tesla, "~> 1.3.0"},
       {:riverside, "~> 1.2.6"},
       {:timex, "~> 3.6"},
-      {:cachex, "~> 3.3"}
+      {:cachex, "~> 3.3"},
+      {:gen_stage, "~> 1.0"}
     ]
   end
 

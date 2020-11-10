@@ -79,10 +79,6 @@ defmodule HobbyStocks.Coinbase.WSClient do
     {:ok, state}
   end
 
-  defp handle_msg(any, state) do
-    IO.inspect(any)
-    {:ok, state}
-  end
 
   def handle_disconnect(_conn, state) do
     {:reconnect, state}

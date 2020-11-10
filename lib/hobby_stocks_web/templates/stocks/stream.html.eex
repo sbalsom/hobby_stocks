@@ -1,4 +1,4 @@
-<div class="phx-hero" style="position: absolute;">
+<div class="main" style="position: absolute;">
   <h2>Last 200 Sales</h2>
   <h3><%= @ticker %></h3>
 

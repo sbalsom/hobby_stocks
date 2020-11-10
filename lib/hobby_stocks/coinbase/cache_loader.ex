@@ -2,7 +2,7 @@ defmodule HobbyStocks.Coinbase.CacheLoader do
   @moduledoc """
   Loads 200 cached stock prices on demand of streaming webpage
   """
-  use GenServer
+  use GenStage
 
   def start_link do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
@@ -15,6 +15,13 @@ defmodule HobbyStocks.Coinbase.CacheLoader do
   def handle_info({:load_cache, symbol}, state) do
     load_cache(symbol)
     {:noreply, state}
+  end
+
+
+  def terminate(reason, _state)
+      when reason in [:normal, :shutdown, "normal", "shutdown", :kill] do
+    IO.inspect(reason)
+    :ok
   end
 
   defp load_cache(symbol) do

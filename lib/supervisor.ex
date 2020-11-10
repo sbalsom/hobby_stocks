@@ -7,7 +7,6 @@ defmodule HobbyStocks.Supervisor do
 
   def init(_) do
     children = [
-      supervisor(HobbyStocks.Tiingo.Supervisor, []),
       supervisor(HobbyStocks.Coinbase.Supervisor, []),
       worker(HobbyStocks.Coinbase.CacheLoader, [])
     ]

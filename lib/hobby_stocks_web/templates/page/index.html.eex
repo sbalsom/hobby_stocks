@@ -1,38 +1,15 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>Peace of mind from prototype to production</p>
-</section>
 
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.5/CHANGELOG.md">v1.5 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-      <li>
-        <a href="https://elixir-slackin.herokuapp.com/">Elixir on Slack</a>
-      </li>
-    </ul>
-  </article>
-</section>
+<div class="main">
+  <h2>Available Tickers:</h2>
+  <ul>
+    <li>
+      <h3>Coinbase</h3>
+      <ul>
+        <li><%= link "BTC-USD", to: Routes.stocks_path(@conn, :stream, ticker: "BTC-USD", channel: "ticker") %></li>
+        <li><%= link "BTC-EUR", to: Routes.stocks_path(@conn, :stream, ticker: "BTC-EUR", channel: "ticker") %></li>
+        <li><%= link "ETH-USD", to: Routes.stocks_path(@conn, :stream, ticker: "ETH-USD", channel: "ticker") %></li>
+        <li><%= link "ETH-EUR", to: Routes.stocks_path(@conn, :stream, ticker: "ETH-EUR", channel: "ticker") %></li>
+      </ul>
+    </li>
+   </ul>
+</div>
